@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hyper Space Snake v0.1</title>
+		<style>
+		.button1 {
+		background-color: #4CAF50;
+		border: 2px solid #000000;
+		border-radius: 25px;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		}
+		.button2 {
+		background-color: #3728c1;
+		border: 2px solid #000000;
+		border-radius: 25px;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		}
+		.button3 {
+		background-color: #dd0000;
+		border: 2px solid #000000;
+		border-radius: 25px;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+		}
+		</style>
+	</head>
+	
+	<body>
+		<h1> Hyper Space Snake </h1>
+		<div id="buttons" style="float:left; text-align:center;">
+			<input type="button" class="button1" id="new" value="New Game"/><br><br>
+			<input type="button" class="button2" id="menu" value="Main Menu"/><br><br>
+			<input type="button" class="button3" id="submit" value="Submit"/><br><br><br>
+			<div style="font-size:24px;">
+				Score :
+			<span id="score">0</span>
+			</div>
+		</div>
+		<canvas id="gameCanvas" width="800" height="600" style="border:5px solid #000000; float:left;"></canvas>
+		<canvas id="seperatorCanvas" width="50" height="600" style="border:5px solid #ffffff; float:left;"></canvas>
+		<div id="help" width="400" height="600" style="float:right text-align:center;">
+			<h1>How to Play</h1>
+			<p>Out of nowhere, Snake appears in a very strange place. What place is this.. It cannot be! HYPER SPACE!!!</p>
+			<p>Hyperspace is very dangerous place, where the attempt to survice is a must. Help Snake to survive for as long as possible by feeding him/her. Mysterious food appears in the Hyperspace from time to time. There seems to be a Hyperloop where Snake is able to hang out.<br></p>
+			<p>To control Snake, use the arrow keys or WASD<br></p>
+			<p>Avoid colliding the walls of the Hyperspace or yourself, it has sever consequences...</p>
+			<p>Good Luck! </p>
+		</div>
+			
+	</body>
+</html>
