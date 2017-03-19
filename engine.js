@@ -10,6 +10,7 @@ function start_game(){
 	var direction = "down";
 	var snake_lenght = 4;
 	var snake_position = [[1,1], [2,1], [3,1], [4,1]];
+	var food = [-1,-1];
 	var refresh_rate = 100;
 	var keys = {
         37 : 'left',
@@ -19,12 +20,18 @@ function start_game(){
     };
 	
 	drawSnake();
-	
+	spawnFood();
 	loop();
 	
 	function loop(){
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		getNewPosition();
+		drawFood();
+		console.log(snake_position[snake_lenght-1][1]);
+		if(checkCollision() == 1){
+			console.log("End Game");
+			return;
+		}
 		drawSnake();
 		status = setTimeout(function() { loop(); },refresh_rate);
 	}
@@ -56,6 +63,7 @@ function start_game(){
 		else if(direction == "down"){
 			snake_position[i]=[snake_position[i-1][0], snake_position[i-1][1]+1];
 		}
+		
 	}
 	
 	window.onkeydown = function(event){
@@ -81,6 +89,52 @@ function start_game(){
 			direction = new_direction;
 		}
 		
+	}
+	
+	function checkCollision(){
+		//Checks the collision of top and left wall
+		if(snake_position[snake_lenght-1][0] <= -1 || snake_position[snake_lenght-1][1] <= -1){
+			console.log("Collision");
+			return 1;
+		}
+		//Checks the collision of right and bottom wall
+		else if(snake_position[snake_lenght-1][0] >= 40 || snake_position[snake_lenght-1][1] >= 30){
+			console.log("Collision");
+			return 1;
+		}
+		//Checks the collision of itself
+		var i = 0;
+		while(i < snake_lenght - 1){
+			if(snake_position[i][0] == snake_position[snake_lenght-1][0] && snake_position[i][1] == snake_position[snake_lenght-1][1]){
+				return 1;
+			}
+			++i;
+		}	
+		return 0;
+	}
+	
+	//Function to create new food in the map
+	function spawnFood(){
+		food[0] = Math.floor(Math.random() * 40);
+		food[1] = Math.floor(Math.random() * 30);
+		console.log(food[0], food[1]);
+		var i = 0;
+		while(i < snake_lenght){
+			if(food[0] == snake_position[i][0] && food[1] == snake_position[i][1]){
+				food[0] = Math.floor(Math.random() * 40);
+				food[1] = Math.floor(Math.random() * 30);
+				i = 0;
+			}
+			++i;
+		}
+		
+		return 0;
+	} 
+	
+	function drawFood(){
+		ctx.fillStyle='#F45628';
+		ctx.fillRect(food[0]*block,food[1]*block,block,block);
+		return;
 	}
 }
 
