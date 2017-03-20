@@ -46,6 +46,31 @@ function start_game(){
 	}
 	
 	function getNewPosition(){
+		if(direction == "right" && snake_position[snake_lenght-1][0]+1 == food[0] && snake_position[snake_lenght-1][1] == food[1]){
+			snake_lenght += 1;
+			snake_position.push(food);
+			spawnFood();
+			
+			return;
+		}
+		else if(direction == "left" && snake_position[snake_lenght-1][0]-1 == food[0] && snake_position[snake_lenght-1][1] == food[1]){
+			snake_lenght += 1;
+			snake_position.push(food);
+			spawnFood();
+			return;
+		}
+		else if(direction == "up" && snake_position[snake_lenght-1][0] == food[0] && snake_position[snake_lenght-1][1]-1 == food[1]){
+			snake_lenght += 1;
+			snake_position.push(food);
+			spawnFood();
+			return;
+		}
+		else if(direction == "down" && snake_position[snake_lenght-1][0] == food[0] && snake_position[snake_lenght-1][1]+1 == food[1]){
+			snake_lenght += 1;
+			snake_position.push(food);
+			spawnFood();
+			return;
+		}
 		var i = 0;
 		while(i < (snake_lenght-1)){
 			snake_position[i] = snake_position[i+1];
@@ -115,6 +140,7 @@ function start_game(){
 	
 	//Function to create new food in the map
 	function spawnFood(){
+		food = [-1, -1];
 		food[0] = Math.floor(Math.random() * 40);
 		food[1] = Math.floor(Math.random() * 30);
 		console.log(food[0], food[1]);
