@@ -12,12 +12,14 @@ function start_game(){
 	var snake_position = [[1,1], [2,1], [3,1], [4,1]];
 	var food = [-1,-1];
 	var refresh_rate = 100;
+	var score = 0;
 	var keys = {
         37 : 'left',
         38 : 'up',
         39 : 'right',
         40 : 'down'
     };
+	var direction_changed = false;
 	
 	drawSnake();
 	spawnFood();
@@ -33,6 +35,8 @@ function start_game(){
 			return;
 		}
 		drawSnake();
+		direction_changed = false;
+		document.getElementById("score").innerHTML = score;
 		status = setTimeout(function() { loop(); },refresh_rate);
 	}
 	
@@ -50,25 +54,28 @@ function start_game(){
 			snake_lenght += 1;
 			snake_position.push(food);
 			spawnFood();
-			
+			score += 1;
 			return;
 		}
 		else if(direction == "left" && snake_position[snake_lenght-1][0]-1 == food[0] && snake_position[snake_lenght-1][1] == food[1]){
 			snake_lenght += 1;
 			snake_position.push(food);
 			spawnFood();
+			score += 1;
 			return;
 		}
 		else if(direction == "up" && snake_position[snake_lenght-1][0] == food[0] && snake_position[snake_lenght-1][1]-1 == food[1]){
 			snake_lenght += 1;
 			snake_position.push(food);
 			spawnFood();
+			score += 1;
 			return;
 		}
 		else if(direction == "down" && snake_position[snake_lenght-1][0] == food[0] && snake_position[snake_lenght-1][1]+1 == food[1]){
 			snake_lenght += 1;
 			snake_position.push(food);
 			spawnFood();
+			score += 1;
 			return;
 		}
 		var i = 0;
@@ -92,6 +99,10 @@ function start_game(){
 	}
 	
 	window.onkeydown = function(event){
+		if(direction_changed == true){
+			return;
+		}
+		direction_changed = true;
 		new_direction = keys[event.keyCode];
 		console.log(new_direction);
 		if(new_direction){
