@@ -1,7 +1,7 @@
 
 
 function start_game(){
-	
+
 	var canvas = document.getElementById('gameCanvas');
     var ctx = canvas.getContext('2d');
     var status=false;
@@ -14,17 +14,21 @@ function start_game(){
 	var refresh_rate = 100;
 	var score = 0;
 	var keys = {
-        37 : 'left',
-        38 : 'up',
-        39 : 'right',
-        40 : 'down'
+				65	:	'left',
+        37	: 'left',
+				87 	:	'up',
+        38  : 'up',
+				68	: 'right',
+        39  : 'right',
+				83	: 'down',
+        40  : 'down'
     };
 	var direction_changed = false;
-	
+
 	drawSnake();
 	spawnFood();
 	loop();
-	
+
 	function loop(){
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		getNewPosition();
@@ -39,7 +43,7 @@ function start_game(){
 		document.getElementById("score").innerHTML = score;
 		status = setTimeout(function() { loop(); },refresh_rate);
 	}
-	
+
 	function drawSnake(){
 		ctx.fillStyle='#000000';
 		var i = 0;
@@ -48,7 +52,7 @@ function start_game(){
 			i+=1;
 		}
 	}
-	
+
 	function getNewPosition(){
 		if(direction == "right" && snake_position[snake_lenght-1][0]+1 == food[0] && snake_position[snake_lenght-1][1] == food[1]){
 			snake_lenght += 1;
@@ -95,9 +99,9 @@ function start_game(){
 		else if(direction == "down"){
 			snake_position[i]=[snake_position[i-1][0], snake_position[i-1][1]+1];
 		}
-		
+
 	}
-	
+
 	window.onkeydown = function(event){
 		if(direction_changed == true){
 			return;
@@ -110,7 +114,7 @@ function start_game(){
 			event.preventDefault();
 		}
     };
-	
+
 	function changeDirection() {
 		if(new_direction == "up" && direction != "down"){
 			direction = new_direction;
@@ -124,9 +128,9 @@ function start_game(){
 		else if(new_direction == "down" && direction != "up"){
 			direction = new_direction;
 		}
-		
+
 	}
-	
+
 	function checkCollision(){
 		//Checks the collision of top and left wall
 		if(snake_position[snake_lenght-1][0] <= -1 || snake_position[snake_lenght-1][1] <= -1){
@@ -145,10 +149,10 @@ function start_game(){
 				return 1;
 			}
 			++i;
-		}	
+		}
 		return 0;
 	}
-	
+
 	//Function to create new food in the map
 	function spawnFood(){
 		food = [-1, -1];
@@ -164,14 +168,13 @@ function start_game(){
 			}
 			++i;
 		}
-		
+
 		return 0;
-	} 
-	
+	}
+
 	function drawFood(){
 		ctx.fillStyle='#F45628';
 		ctx.fillRect(food[0]*block,food[1]*block,block,block);
 		return;
 	}
 }
-
