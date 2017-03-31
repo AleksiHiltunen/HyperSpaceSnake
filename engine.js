@@ -57,6 +57,8 @@ function start_game(){
 				drawSnake();
 				ctx.font="108px Arial";
 				ctx.fillText("YOU DIED! :'(", 100, 350);
+				ctx.fillStyle = 'red';
+				ctx.fill();
 				return;
 			}
 			drawSnake();
@@ -253,7 +255,7 @@ function load_request(){
 	}
 }
 
-function save(){
+function save_game(){
 	var message_save = {
 		messageType: "SAVE",
 		gameState: {
