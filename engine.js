@@ -14,13 +14,13 @@ function start_game(){
 	var refresh_rate = 100;
 	var score = 0;
 	var keys = {
-				65	:	'left',
+		65	: 'left',
         37	: 'left',
-				87 	:	'up',
+		87 	: 'up',
         38  : 'up',
-				68	: 'right',
+		68	: 'right',
         39  : 'right',
-				83	: 'down',
+		83	: 'down',
         40  : 'down'
     };
 	var direction_changed = false;
@@ -36,6 +36,7 @@ function start_game(){
 		console.log(snake_position[snake_lenght-1][1]);
 		if(checkCollision() == 1){
 			console.log("End Game");
+			drawSnake();
 			return;
 		}
 		drawSnake();
@@ -48,7 +49,7 @@ function start_game(){
 		ctx.fillStyle='#000000';
 		var i = 0;
 		while(i < snake_lenght){
-			ctx.fillRect(snake_position[i][0]*block,snake_position[i][1]*block,block,block);
+			ctx.fillRect(snake_position[i][0]*block,snake_position[i][1]*block,block-0.5,block-0.5);
 			i+=1;
 		}
 	}
@@ -108,7 +109,6 @@ function start_game(){
 		}
 		direction_changed = true;
 		new_direction = keys[event.keyCode];
-		console.log(new_direction);
 		if(new_direction){
 			changeDirection(direction);
 			event.preventDefault();
@@ -158,7 +158,6 @@ function start_game(){
 		food = [-1, -1];
 		food[0] = Math.floor(Math.random() * 40);
 		food[1] = Math.floor(Math.random() * 30);
-		console.log(food[0], food[1]);
 		var i = 0;
 		while(i < snake_lenght){
 			if(food[0] == snake_position[i][0] && food[1] == snake_position[i][1]){
